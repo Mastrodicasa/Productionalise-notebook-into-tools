@@ -1,0 +1,2 @@
+The only reason of that file is to see what's printed when a non json file is given as an input.
+
