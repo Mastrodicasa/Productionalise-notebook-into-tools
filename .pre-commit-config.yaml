@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/asottile/reorder_python_imports
-    rev: v2.3.6
+    rev: v2.5.0
     hooks:
     - id: reorder-python-imports
       exclude: \.git|\.hg|\.mypy_cache|\.tox|\.venv|venv|_build|buck-out|build|dist|app/vendor
@@ -14,7 +14,7 @@ repos:
                "--remove-all-unused-imports",
                "--exclude=.venv,venv"]
   - repo: https://github.com/PyCQA/flake8
-    rev: 3.8.4
+    rev: 3.9.2
     hooks:
       - id: flake8
         exclude: \.git|\.hg|\.mypy_cache|\.tox|\.venv|venv|_build|buck-out|build|dist|app/vendor
