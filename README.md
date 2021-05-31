@@ -1,4 +1,14 @@
 This is the result on my work for this tech test.
+<br/> The result of the process can be seen by doing this:
+```buildoutcfg
+cd to_clippd
+python3 to_clippd.py
+```
+The functions can be tested by doing:
+```buildoutcfg
+cd to_clippd
+python3 -m unittest
+```
 
 ## Task
 Convert the jupyter notebook into modular code that could be evaluated for one or more

@@ -1,9 +1,10 @@
 import unittest
+
 import numpy as np
 import pandas as pd
 from derive_insights import DeriveInsights
 
-PATH_DATA_PICKLE = "tests/unit/test_derive_insights/arccos_data.pkl"
+PATH_DATA_PICKLE = "test/unit/test_derive_insights/arccos_data.pkl"
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v2.3.6
+    hooks:
+    - id: reorder-python-imports
+      exclude: \.git|\.hg|\.mypy_cache|\.tox|\.venv|venv|_build|buck-out|build|dist|app/vendor
+  - repo: git@github.com:myint/autoflake.git
+    rev: v1.4
+    hooks:
+      - id: autoflake
+        exclude: \.git|\.hg|\.mypy_cache|\.tox|\.venv|venv|_build|buck-out|build|dist|app/vendor
+        language_version: python3.8
+        args: ["--in-place",
+               "--remove-all-unused-imports",
+               "--exclude=.venv,venv"]
+  - repo: https://github.com/PyCQA/flake8
+    rev: 3.8.4
+    hooks:
+      - id: flake8
+        exclude: \.git|\.hg|\.mypy_cache|\.tox|\.venv|venv|_build|buck-out|build|dist|app/vendor
+        language_version: python3.8
+        additional_dependencies:
+          - flake8-quotes
+        args: ["--ignore=E203,E266,E501,W503,F403",
+               "--max-line-length=120",
+               "--max-complexity=18",
+               "--select=B,C,E,F,W,T4,B9,Q",
+               "--exclude=.venv,venv",
+               "--inline-quotes=double"]

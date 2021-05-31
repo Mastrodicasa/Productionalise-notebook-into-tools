@@ -1,13 +1,13 @@
-import numpy as np
-import pandas as pd
+import os
 
-from scipy.stats import zscore
-from geopy import distance
-import seaborn as sns
-from scipy.interpolate import interp1d
 import derive_insights.shot_misses as shot_misses
 import derive_insights.stroke_gained as stroke_gained
-import os
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from geopy import distance
+from scipy.interpolate import interp1d
+from scipy.stats import zscore
 
 # get the location of this script so we can read in local files
 # otherwise we have problems were we can't find the files

@@ -1,12 +1,13 @@
-import numpy as np
-import unittest
-import pandas as pd
 import json
+import unittest
+
+import numpy as np
+import pandas as pd
 from aggregate_data import AggregateData
 
-PATH_ROUNDS_JSON = "tests/unit/test_aggregate_data/round.json"
-PATH_TERRAIN_JSON = "tests/unit/test_aggregate_data/terrain.json"
-PATH_COURSE_JSON = "tests/unit/test_aggregate_data/2020-12-03T12_20_14.080Z.json"
+PATH_ROUNDS_JSON = "test/unit/test_aggregate_data/round.json"
+PATH_TERRAIN_JSON = "test/unit/test_aggregate_data/terrain.json"
+PATH_COURSE_JSON = "test/unit/test_aggregate_data/2020-12-03T12_20_14.080Z.json"
 
 
 class MyTestCase(unittest.TestCase):

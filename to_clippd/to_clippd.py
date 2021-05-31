@@ -1,7 +1,7 @@
-from read_file import ReadFile
 from aggregate_data import AggregateData
 from derive_insights import DeriveInsights
 from map_to_clippd import MapToClippd
+from read_file import ReadFile
 
 
 class ToClippd(object):
@@ -48,4 +48,3 @@ class ToClippd(object):
 if __name__ == '__main__':
     cl = ToClippd()
     print(cl.process("arccos", "round.json", "terrain.json", "2020-12-03T12_20_14.080Z.json"))
-

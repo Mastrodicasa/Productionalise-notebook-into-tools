@@ -1,13 +1,14 @@
 import unittest
-from read_file.read_file import ReadFile
 from io import StringIO
 from unittest.mock import patch
 
-PATH_TEST_ROUNDS = "tests/unit/test_read_file/test_rounds.json"
-PATH_TEST_TERRAIN = "tests/unit/test_read_file/test_terrain.json"
-PATH_TEST_COURSE = "tests/unit/test_read_file/test_course.json"
-NOT_EXIST_ROUNDS = "tests/unit/test_read_file/DOES_NOT_EXIST.json"
-WRONG_TEST_ROUNDS = "tests/unit/test_read_file/to_test_when_wrong_input.txt"
+from read_file.read_file import ReadFile
+
+PATH_TEST_ROUNDS = "test/unit/test_read_file/test_rounds.json"
+PATH_TEST_TERRAIN = "test/unit/test_read_file/test_terrain.json"
+PATH_TEST_COURSE = "test/unit/test_read_file/test_course.json"
+NOT_EXIST_ROUNDS = "test/unit/test_read_file/DOES_NOT_EXIST.json"
+WRONG_TEST_ROUNDS = "test/unit/test_read_file/to_test_when_wrong_input.txt"
 
 
 class MyTestCase(unittest.TestCase):
