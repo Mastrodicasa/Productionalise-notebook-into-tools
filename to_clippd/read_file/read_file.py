@@ -6,7 +6,7 @@ class ReadFile(object):
     """
     Reads the json files coming from external sources and store the data as private variables.
 
-    At the moment the class can only ready files from the source "arccos". If the files can't be read,
+    At the moment the class can only ready files from the source "arccos". If the files can"t be read,
     the class will be returned with private variables equal to None.
 
     Attributes:
@@ -47,7 +47,7 @@ class ReadFile(object):
                     with open(self.course_file) as f:
                         self.course_info = json.load(f)
                 # if the files are not json
-                except json.JSONDecodeError as j_e:
-                    print('Can\'t read file, bad format.')
+                except json.JSONDecodeError:
+                    print("Can't read file, bad format.")
                 except Exception as e:
                     print("Can't read file", e)

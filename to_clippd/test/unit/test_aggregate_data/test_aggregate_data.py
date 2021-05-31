@@ -3,7 +3,7 @@ import unittest
 
 import numpy as np
 import pandas as pd
-from aggregate_data import AggregateData
+from aggregate_data.aggregate_data import AggregateData
 
 PATH_ROUNDS_JSON = "test/unit/test_aggregate_data/round.json"
 PATH_TERRAIN_JSON = "test/unit/test_aggregate_data/terrain.json"
@@ -64,32 +64,32 @@ class MyTestCase(unittest.TestCase):
 
     def test_create_hole_info_terrain(self):
         # Those should be the columns of a hole_info_terrain_columns dataframe
-        hole_info_terrain_columns = ['shot_holeId', 'shot_shotId', 'shot_clubType', 'shot_noOfPenalties',
-                                     'shot_isFairWay', 'shot_isFairWayRight', 'shot_isFairWayLeft',
-                                     'shot_isRecoveryShot', 'shot_strokesGained', 'shot_startDistanceToCG',
-                                     'shot_endDistanceToCG', 'shot_startTerrain', 'shot_endTerrain',
-                                     'shot_distance', 'shot_distanceFromFairWayBounds', 'shot_clubId',
-                                     'shot_shouldIgnore', 'shot_needsRecovery', 'shot_isFpOrMissedShot',
-                                     'shot_surrogateKey', 'shot_isLeft', 'shot_isRight',
-                                     'shot_distanceFromCenterLine', 'hole_noOfShots',
-                                     'hole_noOfDrivePlusOnePenalties', 'hole_isUpDownChance',
-                                     'hole_approachStrokesGained', 'hole_noOfSandShots', 'hole_isGir',
-                                     'hole_noOfPuttPlusOnePenalties', 'hole_chipStrokesGained',
-                                     'hole_noOfPutts', 'hole_isUpDown', 'hole_noOfApproachPlusTwoPenalties',
-                                     'hole_noOfChipErrors', 'hole_noOfApproachPlusOnePenalties',
-                                     'hole_isSandSave', 'hole_puttStrokesGained', 'hole_isFairWay',
-                                     'hole_sandStrokesGained', 'hole_noOfChipPlusOnePenalties',
-                                     'hole_noOfChipPlusTwoPenalties', 'hole_endTime', 'hole_noOfDrives',
-                                     'hole_isSandSaveChance', 'hole_startTime', 'hole_isFairWayLeft',
-                                     'hole_noOfSandPlusOnePenalties', 'hole_holeId',
-                                     'hole_noOfRecoveryShots', 'hole_adjustedScore',
-                                     'hole_driveStrokesGained', 'hole_noOfPuttPlusTwoPenalties',
-                                     'hole_isFairWayRight', 'hole_noOfApproachShots', 'hole_par',
-                                     'hole_noOfSandPlusTwoPenalties', 'hole_noOfDrivePlusTwoPenalties',
-                                     'hole_noOfSandErrors', 'hole_noOfChips', 'shot_noOfPutts',
-                                     'shot_strokesToGetDown', 'shot_angle', 'shot_isApproach',
-                                     'shot_isLayUp', 'shot_isUpDownChance', 'shot_isUpDown',
-                                     'shot_isSandSaveChance', 'shot_isSandSave', 'roundId']
+        hole_info_terrain_columns = ["shot_holeId", "shot_shotId", "shot_clubType", "shot_noOfPenalties",
+                                     "shot_isFairWay", "shot_isFairWayRight", "shot_isFairWayLeft",
+                                     "shot_isRecoveryShot", "shot_strokesGained", "shot_startDistanceToCG",
+                                     "shot_endDistanceToCG", "shot_startTerrain", "shot_endTerrain",
+                                     "shot_distance", "shot_distanceFromFairWayBounds", "shot_clubId",
+                                     "shot_shouldIgnore", "shot_needsRecovery", "shot_isFpOrMissedShot",
+                                     "shot_surrogateKey", "shot_isLeft", "shot_isRight",
+                                     "shot_distanceFromCenterLine", "hole_noOfShots",
+                                     "hole_noOfDrivePlusOnePenalties", "hole_isUpDownChance",
+                                     "hole_approachStrokesGained", "hole_noOfSandShots", "hole_isGir",
+                                     "hole_noOfPuttPlusOnePenalties", "hole_chipStrokesGained",
+                                     "hole_noOfPutts", "hole_isUpDown", "hole_noOfApproachPlusTwoPenalties",
+                                     "hole_noOfChipErrors", "hole_noOfApproachPlusOnePenalties",
+                                     "hole_isSandSave", "hole_puttStrokesGained", "hole_isFairWay",
+                                     "hole_sandStrokesGained", "hole_noOfChipPlusOnePenalties",
+                                     "hole_noOfChipPlusTwoPenalties", "hole_endTime", "hole_noOfDrives",
+                                     "hole_isSandSaveChance", "hole_startTime", "hole_isFairWayLeft",
+                                     "hole_noOfSandPlusOnePenalties", "hole_holeId",
+                                     "hole_noOfRecoveryShots", "hole_adjustedScore",
+                                     "hole_driveStrokesGained", "hole_noOfPuttPlusTwoPenalties",
+                                     "hole_isFairWayRight", "hole_noOfApproachShots", "hole_par",
+                                     "hole_noOfSandPlusTwoPenalties", "hole_noOfDrivePlusTwoPenalties",
+                                     "hole_noOfSandErrors", "hole_noOfChips", "shot_noOfPutts",
+                                     "shot_strokesToGetDown", "shot_angle", "shot_isApproach",
+                                     "shot_isLayUp", "shot_isUpDownChance", "shot_isUpDown",
+                                     "shot_isSandSaveChance", "shot_isSandSave", "roundId"]
         # Read a round json file and run create_hole_info
         with open(PATH_TERRAIN_JSON) as f:
             terrain_data = [json.load(f)]
@@ -106,26 +106,26 @@ class MyTestCase(unittest.TestCase):
 
     def test_process_check_output(self):
         # Those should be the columns of a hole_info dataframe
-        hole_info_columns = ['shot_shotId', 'shot_clubType', 'shot_clubId', 'shot_startLat',
-                             'shot_startLong', 'shot_endLat', 'shot_endLong', 'shot_distance',
-                             'shot_isHalfSwing', 'shot_startAltitude', 'shot_endAltitude',
-                             'shot_shotTime', 'shot_shouldIgnore', 'shot_noOfPenalties',
-                             'shot_isSandUser', 'shot_isNonSandUser',
-                             'shot_shouldConsiderPuttAsChip', 'shot_userStartTerrainOverride',
-                             'hole_noOfShots', 'hole_isSandSaveChance', 'hole_approachShotId',
-                             'hole_isUpDownChance', 'hole_startTime', 'hole_putts',
-                             'hole_isFairWayLeft', 'hole_holeId', 'hole_pinLong',
-                             'hole_isFairWayUser', 'hole_shouldIgnore', 'hole_isUpDown',
-                             'hole_isFairWayRight', 'hole_isFairWayRightUser',
-                             'hole_isFairWayLeftUser', 'hole_isSandSave', 'hole_pinLat',
-                             'hole_scoreOverride', 'hole_isFairWay', 'hole_endTime', 'hole_isGir',
-                             'roundId', 'round_roundId', 'round_roundVersion', 'round_courseId',
-                             'round_userId', 'round_startTime', 'round_endTime', 'round_noOfHoles',
-                             'round_noOfShots', 'round_shouldIgnore', 'round_teeId',
-                             'round_isPrivate', 'round_isVerified', 'round_isEnded',
-                             'round_isDriverRound', 'round_courseVersion', 'round_lastModifiedTime',
-                             'round_noOfHolesOverride', 'round_scoreOverride', 'name', 'courseId',
-                             'hole_par', 'shot_startDistanceToCG', 'shot_startTerrain', 'shot_endTerrain']
+        hole_info_columns = ["shot_shotId", "shot_clubType", "shot_clubId", "shot_startLat",
+                             "shot_startLong", "shot_endLat", "shot_endLong", "shot_distance",
+                             "shot_isHalfSwing", "shot_startAltitude", "shot_endAltitude",
+                             "shot_shotTime", "shot_shouldIgnore", "shot_noOfPenalties",
+                             "shot_isSandUser", "shot_isNonSandUser",
+                             "shot_shouldConsiderPuttAsChip", "shot_userStartTerrainOverride",
+                             "hole_noOfShots", "hole_isSandSaveChance", "hole_approachShotId",
+                             "hole_isUpDownChance", "hole_startTime", "hole_putts",
+                             "hole_isFairWayLeft", "hole_holeId", "hole_pinLong",
+                             "hole_isFairWayUser", "hole_shouldIgnore", "hole_isUpDown",
+                             "hole_isFairWayRight", "hole_isFairWayRightUser",
+                             "hole_isFairWayLeftUser", "hole_isSandSave", "hole_pinLat",
+                             "hole_scoreOverride", "hole_isFairWay", "hole_endTime", "hole_isGir",
+                             "roundId", "round_roundId", "round_roundVersion", "round_courseId",
+                             "round_userId", "round_startTime", "round_endTime", "round_noOfHoles",
+                             "round_noOfShots", "round_shouldIgnore", "round_teeId",
+                             "round_isPrivate", "round_isVerified", "round_isEnded",
+                             "round_isDriverRound", "round_courseVersion", "round_lastModifiedTime",
+                             "round_noOfHolesOverride", "round_scoreOverride", "name", "courseId",
+                             "hole_par", "shot_startDistanceToCG", "shot_startTerrain", "shot_endTerrain"]
         # Read in json files as dictionaries.
         with open(PATH_ROUNDS_JSON) as f:
             rounds_data = [json.load(f)]
@@ -140,5 +140,5 @@ class MyTestCase(unittest.TestCase):
             self.assertIn(column, df_hole.columns, column + " should exist in the dataframe")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

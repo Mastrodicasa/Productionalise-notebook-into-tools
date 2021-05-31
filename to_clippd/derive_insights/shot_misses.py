@@ -17,8 +17,7 @@ def get_bearing(lat1, lon1, lat2, lon2):
 def calculate_start_end_pin_angle(shot_distance, shot_start_distance_yards, shot_end_distance_yards):
     """Function to calculate short/long distances."""
     phi = np.where((shot_end_distance_yards > 0) & (shot_distance > 0),
-                   np.arccos((shot_distance ** 2 + shot_end_distance_yards ** 2 - shot_start_distance_yards ** 2) \
-                             / (2 * shot_distance * shot_end_distance_yards)),
+                   np.arccos((shot_distance ** 2 + shot_end_distance_yards ** 2 - shot_start_distance_yards ** 2) / (2 * shot_distance * shot_end_distance_yards)),
                    0)
     return np.rad2deg(phi)
 
