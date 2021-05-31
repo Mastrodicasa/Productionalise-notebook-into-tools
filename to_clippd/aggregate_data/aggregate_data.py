@@ -6,10 +6,10 @@ class AggregateData(object):
     Takes 3 data (rounds_data, terrain_data, course_info) and aggregates the data into one dataframe.
 
     Attributes:
-        numeric_features: All the columns that should have numerical values
-        time_features: All the columns that should have datetime values
-        boolean_map: Dict mapping string representation of booleans and pythonic booleans
-        boolean_map: All the columns that should have boolean values
+        numeric_features (array): All the columns that should have numerical values
+        time_features (array): All the columns that should have datetime values
+        boolean_map (dict): Dict mapping string representation of booleans and pythonic booleans
+        boolean_map (array): All the columns that should have boolean values
     """
 
     def __init__(self):
@@ -26,8 +26,16 @@ class AggregateData(object):
                                  'hole_isFairWayLeftUser', 'hole_isGir', 'hole_isFairWay',
                                  'hole_isSandSaveChance']
 
-    def standardize_values(self, hole_info):
-        """Makes sure the values in the dataframe are either numeric, datetime or boolean."""
+    def __standardize_values(self, hole_info):
+        """
+        Makes sure the values in the dataframe are either numeric, datetime or boolean.
+
+        Args:
+            hole_info (dataframe): Dataframe that has all the columns from self.numeric_features, self.time_features and
+                       self.boolean_features combined.
+        Returns:
+            hole_info (dataframe): All the columns cited above are now either numbers, datetime or booleans.
+        """
         # Convert numeric features to float/int.
         for i in self.numeric_features:
             hole_info[i] = pd.to_numeric(hole_info[i])
@@ -40,13 +48,16 @@ class AggregateData(object):
         hole_info[self.boolean_features] = hole_info[self.boolean_features].replace(self.boolean_map)
         return hole_info
 
-    # create: a json file, dataframe is the correct resutlt
-    # run the function, check if the output == what wa sstored
-    # test when the input is None
-    def create_hole_info(self, rounds_data):
-        ## if rounds_data =None
-        ## return None
+    def __create_hole_info(self, rounds_data):
+        """
+        Converts rounds_data into a dataframe.
 
+        Args:
+            rounds_data (array): Array containing the data from rounds
+
+        Returns:
+            (dataframe) The json structure is flatten out. Values are standardized.
+        """
         ## Convert hole_info to dataframe.
         appended_data = []
         for item in rounds_data:
@@ -62,20 +73,29 @@ class AggregateData(object):
 
         hole_info = pd.concat(appended_data)
 
-        ## Convert round info to dataframe.
+        # Convert round info to dataframe.
         round_info = pd.DataFrame(rounds_data)
         round_info.columns = ['round_' + column for column in round_info.columns]
 
-        ## Merge hole and round info and drop round_holes column.
+        # Merge hole and round info and drop round_holes column.
         hole_info = hole_info.merge(round_info,
                                     left_on=['roundId'],
                                     right_on=['round_roundId'])
         hole_info.drop(columns=['round_holes'], inplace=True)
 
-        return self.standardize_values(hole_info)
+        return self.__standardize_values(hole_info)
 
     @staticmethod
-    def create_hole_info_terrain(terrain_data):
+    def __create_hole_info_terrain(terrain_data):
+        """
+        Converts terrain_data into a dataframe.
+
+        Args:
+            terrain_data (array): Array containing the data from terrain
+
+        Returns:
+            (dataframe) The json structure is flatten out.
+        """
         # Convert hole_info to dataframe.
         appended_data = []
         for item in terrain_data:
@@ -106,21 +126,37 @@ class AggregateData(object):
             appended_data.append(shot_data)
         return pd.concat(appended_data)
 
-    def process(self, source, rounds_data, terrain_data, course_info):
+    def process(self, rounds_data, terrain_data, course_info):
+        """
+        Takes 3 inputs, creates dataframe for each of them and returns a dataframe that is a combination of the three.
+
+        Args:
+            rounds_data
+            terrain_data
+            course_info
+
+        Returns:
+            None if one of the args is None
+            (dataframe) One dataframe that has merged all the relevant columns
+        """
+        if None in [rounds_data, terrain_data, course_info]:
+            return None
+
         # Create courses dataframe.
         course_info = pd.json_normalize(course_info, 'courses')
 
         # Create shot dataframe.
-        hole_info = self.create_hole_info(rounds_data)
+        hole_info = self.__create_hole_info(rounds_data)
 
-        ## Add course name.
+        # Add course name.
         course_name = course_info[['name', 'courseId']].drop_duplicates()
         hole_info = hole_info.merge(course_name,
                                     how='left',
                                     left_on=['round_courseId'],
                                     right_on=['courseId'])
+
         # Create shot dataframe with terrain data.
-        hole_info_terrain = self.create_hole_info_terrain(terrain_data)
+        hole_info_terrain = self.__create_hole_info_terrain(terrain_data)
 
         # Merge terrain data with shot data.
         hole_info = hole_info.merge(
